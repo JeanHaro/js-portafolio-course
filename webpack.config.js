@@ -3,6 +3,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 // Vamos a crear un modulo que vamos a exportar con un objeto con la configuración deseada
 module.exports = {
@@ -89,5 +90,21 @@ module.exports = {
         }),
 
         new MiniCssExtractPlugin(),
+        new CopyPlugin({
+            // Cuales serán los elementos que vamos a utilizar
+            patterns: [
+                {
+                    // Vamos a tener los elementos 
+                    // Desde donde y hacia donde lo vamos a mover
+                    // resolver - para saber donde estamos ubicados
+                    // src donde esta nuestros recursos
+                    // assets/images - es la carpeta que estamos usando 
+                    // Acá se encuentran los archivos que vamos a mover
+                    from: path.resolve(__dirname, "src", "assets/images"),
+                    // Hacia donde lo movemos
+                    to: "assets/images"
+                }
+            ]
+        })
     ]
 }
