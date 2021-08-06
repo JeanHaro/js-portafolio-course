@@ -2,6 +2,7 @@
 // path ya está instalado en node, así que no hay que hacer una instalación de dependencias
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // Vamos a crear un modulo que vamos a exportar con un objeto con la configuración deseada
 module.exports = {
@@ -57,6 +58,18 @@ module.exports = {
                     // para pasarle el loader que utilizaremos
                     loader: 'babel-loader',
                 }
+            },
+            {
+                // Le decimos que va a trabajar con css
+                // Le damos esa lógica para poder reconocer los archivos css
+                // le damos una regla para que también reconozca la extensión de el preprocesador Styles
+                test: /\.css|.styl$/i,
+                // Cuál es el elemento que vamos a tener
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'stylus-loader'
+                ],
             }
         ]
     },
@@ -73,6 +86,8 @@ module.exports = {
             // Va a tomar nuestro template y lo va a transformar con los elementos que nos va a indicar
             // También lo va poner en la carpeta de distribution con el nombre de index.html
             filename: './index.html'
-        })
+        }),
+
+        new MiniCssExtractPlugin(),
     ]
 }
