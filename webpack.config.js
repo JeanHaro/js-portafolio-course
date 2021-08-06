@@ -34,5 +34,29 @@ module.exports = {
         /* Vamos a tener que utilizar o establecer que tipo de extensiones vamos a tener que identificar webpack
         para leer los archivos que están dentro de nuestro proyecto */
         extensions: ['.js']
-    }
+    },
+    module: {
+        rules: [
+            // Añadiremos la configuración de babel
+            /* rules - las reglas que vamos a establecer de como vamos a trabajar con diferentes tipos de archivos 
+            o elementos dentro de este proyecto */
+            {
+                // test - este test nos va a permitir saber que tipo de extensiones vamos a utilizar
+                // expresiones regulares que nos van a decir como puedo trabajar con diferentes extensiones
+                // /\.m <- cualquier archivo que empiece con m, en este caso de module (extension mjs)
+                // ? - o cualquier archivo que empiece su extensión con js
+                // $ - cierra
+                // / - cerramos nuestra instrucción
+                test: /\.m?js$/,
+                /* Procedemos a excluir, ya que no queremos que utilice los elementos JavaScript o modulos que 
+                se encuentren dentro de node_modules porque sino la aplicación se rompería totalmente */
+                // no utilice nada de node_modules
+                exclude: /node_modules/,
+                use: {
+                    // para pasarle el loader que utilizaremos
+                    loader: 'babel-loader',
+                }
+            }
+        ]
+    },
 }

@@ -1,0 +1,11 @@
+/* Este archivo de configuración para que BABEL entienda como va a trabajar con JavaScript, así como también con 
+que particularidades de codigo va a tener más atención */
+{
+    // Podemos tener n cantidad de estos mismos dentro del arreglo
+    "presets": [
+        "@babel/preset-env"
+    ],
+    "plugins": [
+        "@babel/plugin-transform-runtime"
+    ]
+}
