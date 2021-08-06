@@ -1,6 +1,7 @@
 // require() - nos va a ayudar a traer a este elemento path
 // path ya está instalado en node, así que no hay que hacer una instalación de dependencias
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // Vamos a crear un modulo que vamos a exportar con un objeto con la configuración deseada
 module.exports = {
@@ -59,4 +60,19 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        // Plugins que utilizamos
+        new HtmlWebpackPlugin({
+            /* Le damos un objeto donde estarán las configuraciones que van a añadir a lo que viene siendo este 
+            plugin */
+            // inject - Para que haga la inserción de los elementos
+            inject: true,
+            // template - Darle el template su ubicación
+            template: './public/index.html',
+            // filename - Resultado de esta preparación de HTML
+            // Va a tomar nuestro template y lo va a transformar con los elementos que nos va a indicar
+            // También lo va poner en la carpeta de distribution con el nombre de index.html
+            filename: './index.html'
+        })
+    ]
 }
