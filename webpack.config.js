@@ -71,6 +71,11 @@ module.exports = {
                     'css-loader',
                     'stylus-loader'
                 ],
+            },
+            {
+                // Expresión regular para establecer los elementos que vienen siendo la estructura de los archivos png
+                test: /\.png/,
+                type: 'asset/resource'
             }
         ]
     },
