@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const DotEnv = require('dotenv-webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer');
 
 // Vamos a crear un modulo que vamos a exportar con un objeto con la configuración deseada
 module.exports = {
@@ -152,6 +153,7 @@ module.exports = {
             ]
         }),
         new DotEnv(),
+        new BundleAnalyzerPlugin(),
     ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
