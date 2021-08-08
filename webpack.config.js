@@ -5,7 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require ('terser-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const DotEnv = require('dotenv-webpack');
 
 // Vamos a crear un modulo que vamos a exportar con un objeto con la configuración deseada
 module.exports = {
@@ -148,6 +149,7 @@ module.exports = {
                 }
             ]
         }),
+        new DotEnv(),
     ],
     // optimización
     optimization: {
