@@ -4,6 +4,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require ('terser-webpack-plugin');
 
 // Vamos a crear un modulo que vamos a exportar con un objeto con la configuración deseada
 module.exports = {
@@ -28,9 +30,9 @@ module.exports = {
 
         // Poner un nombre al resultante del JavaScript que se va a unificar
         // Le colocamos como main, también podemos encontrarlo como bundle
-        filename: 'main.js',
+        filename: '[name].[contenthash].js',
         // Para que pasen a los assets images y con el hast.exit y query
-        assetModuleFilename: 'assets/images/[hash][exit][query]',
+        assetModuleFilename: 'assets/images/[hash][ext][query]',
     },
     // Que queremos pasarle a la conf de webpack, con qué extensiones vamos a trabjar en este proyecto
     resolve: {
@@ -92,7 +94,7 @@ module.exports = {
                         // Tipo de dato
                         mimetype: 'aplication/font-woff',
                         // Respete el nombre y la extesión que tiene 
-                        name: "[name].[ext]",
+                        name: "[name].[contenthash].[ext]",
                         // Hacia donde se va a enviar
                         outputPath: "./assets/fonts/",
                         publicPath: "./assets/fonts/",
@@ -117,7 +119,13 @@ module.exports = {
             filename: './index.html'
         }),
 
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            // El hash nos va a permitir identificar el build que estamos haciendo 
+            // Si hay cambios el hash va a cambiar
+            // Optimizamos nuestro proyecto para que obtenga los cambios necesarios de cada build
+            // La optimización que se está dando a CSS como también a JavaScript
+            filename: 'assets/[name].[contenthash].css'
+        }),
         new CopyPlugin({
             // Cuales serán los elementos que vamos a utilizar
             patterns: [
@@ -133,6 +141,15 @@ module.exports = {
                     to: "assets/images"
                 }
             ]
-        })
-    ]
+        }),
+    ],
+    // optimización
+    optimization: {
+        minimize: true,
+        // Agregar la configuración de lo que acabamos de instalar
+        minimizer: [
+            new CssMinimizerPlugin(),
+            new TerserPlugin()
+        ]
+    }
 }
