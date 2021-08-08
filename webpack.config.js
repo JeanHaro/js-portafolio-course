@@ -40,7 +40,13 @@ module.exports = {
         // Como si trabajaras en otra reacción como ESBEL o React
         /* Vamos a tener que utilizar o establecer que tipo de extensiones vamos a tener que identificar webpack
         para leer los archivos que están dentro de nuestro proyecto */
-        extensions: ['.js']
+        extensions: ['.js'],
+        alias: {
+            '@utils': path.resolve(__dirname, './src/utils/'),
+            '@templates': path.resolve(__dirname, './src/templates/'),
+            '@styles': path.resolve(__dirname, './src/styles/'),
+            '@images': path.resolve(__dirname, './src/assets/images/'),
+        }
     },
     module: {
         rules: [
@@ -97,7 +103,7 @@ module.exports = {
                         name: "[name].[contenthash].[ext]",
                         // Hacia donde se va a enviar
                         outputPath: "./assets/fonts/",
-                        publicPath: "./assets/fonts/",
+                        publicPath: "../assets/fonts/",
                         esModule: false,
                     }
                 }
