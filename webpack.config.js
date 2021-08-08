@@ -29,6 +29,8 @@ module.exports = {
         // Poner un nombre al resultante del JavaScript que se va a unificar
         // Le colocamos como main, también podemos encontrarlo como bundle
         filename: 'main.js',
+        // Para que pasen a los assets images y con el hast.exit y query
+        assetModuleFilename: 'assets/images/[hash][exit][query]',
     },
     // Que queremos pasarle a la conf de webpack, con qué extensiones vamos a trabjar en este proyecto
     resolve: {
@@ -76,6 +78,27 @@ module.exports = {
                 // Expresión regular para establecer los elementos que vienen siendo la estructura de los archivos png
                 test: /\.png/,
                 type: 'asset/resource'
+            },
+            {
+                // Expresión reguar para las fuentes descargadas
+                test: /\.(woff|woff2)$/,
+                // Para trabajar directamente con el loader
+                use: {
+                    loader: 'url-loader',
+                    // Configuraciones que necesitamos para saber donde están los archivos
+                    options: {
+                        // Caracteristicas que tiene nuestros recursos en tamaño y en el tipo de formato que tiene
+                        limit: 10000,
+                        // Tipo de dato
+                        mimetype: 'aplication/font-woff',
+                        // Respete el nombre y la extesión que tiene 
+                        name: "[name].[ext]",
+                        // Hacia donde se va a enviar
+                        outputPath: "./assets/fonts/",
+                        publicPath: "./assets/fonts/",
+                        esModule: false,
+                    }
+                }
             }
         ]
     },
