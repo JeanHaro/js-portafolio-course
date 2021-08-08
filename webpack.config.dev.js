@@ -36,6 +36,7 @@ module.exports = {
     /* De esta forma activamos, también le decimos que este documento de información tiene la 
     configuración específica para el modo desarrollo */
     mode: 'development',
+    watch: true,
     // Que queremos pasarle a la conf de webpack, con qué extensiones vamos a trabjar en este proyecto
     resolve: {
         // En un arreglo vamos a pasar las extensiones que vamos a utilizar
