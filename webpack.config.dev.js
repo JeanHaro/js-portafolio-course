@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const DotEnv = require('dotenv-webpack');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // Vamos a crear un modulo que vamos a exportar con un objeto con la configuración deseada
 module.exports = {
@@ -37,6 +37,9 @@ module.exports = {
     /* De esta forma activamos, también le decimos que este documento de información tiene la 
     configuración específica para el modo desarrollo */
     mode: 'development',
+    // Nos va a permitir generar un mapa de nuestro código
+    // Esto es generado en un formato json en donde identifican cada una de las partes de nuestro proyecto 
+    devtool: 'source-map',
     // watch: true,
     // Que queremos pasarle a la conf de webpack, con qué extensiones vamos a trabjar en este proyecto
     resolve: {
